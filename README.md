@@ -2,7 +2,7 @@
 
 A *very* simple web app to track users' beer consumption.
 
-![fast entry](readme_assets/home.png)
+![fast entry](./readme_assets/home.PNG)
 
 ## Install the app on your system
 
@@ -13,7 +13,7 @@ After the tool is installed and launched, clone this repository on your app dire
 
 Firstly, the app needs at least one user to run correctly.
 
-![home page error](readme_assets/home_error.png)
+![home page error](./readme_assets/home_error.PNG)
 
 Then, one can see all user's consumptions during a given time unit, or navigate to a particular user's page.
 One can also modify the time unit (week by default) to see consumption of:
@@ -24,7 +24,7 @@ One can also modify the time unit (week by default) to see consumption of:
 
 If a user had a drink the current day, he can submit it without navigating to his page with this index in the top text input:
 
-![fast entry](readme_assets/fast_entry.png)
+![fast entry](./readme_assets/fast_entry.PNG)
 
 Note that if there are only one user, he will be selected as default user for the fast entry.
 
@@ -36,4 +36,4 @@ Note that if there are only one user, he will be selected as default user for th
 
 Here the user can add or modify a drink on a given date. He can also visualize the evolution of his consumption on a chosen time scale (day, week, month, year) with a given offset (by default the last two weeks):
 
-![fast entry](readme_assets/user.png)
+![fast entry](./readme_assets/user.PNG)
