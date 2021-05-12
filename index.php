@@ -102,7 +102,7 @@
             }
             echo "</tr>";
             echo "<tr>";
-            echo "<td> Quantity (cl) per day </td>"; // second row
+            echo "<td> Equivalent quantity (cl) per day </td>"; // second row
             foreach($users as $user){
                 $res = get_quantity($data[$user], $today, $time_unit);
                 echo "<td>".round($res['quantity']/$res['count'],2)."</td>";
