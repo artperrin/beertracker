@@ -30,6 +30,10 @@
     else{
         $time_unit = 'week';
     }
+    if(isset($_POST['go_to_user']) && isset($_POST['user_name'])){
+        file_put_contents('data/current_user.txt', $_POST['user_name']);
+        header('location: user.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +41,7 @@
 
 <head>
     <title>&#127866 Beer tracker</title>
+    <link rel="stylesheet" type="text/css" href="beertracker/style.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -95,10 +100,10 @@
             }
             echo "</tr>"; // end of first row
             echo "<tr>";
-            echo "<td> Cumulated quantity (cl) </td>"; // second row
+            echo "<td> Cumulated quantity (l) </td>"; // second row
             foreach($users as $user){
                 $res = get_quantity($data[$user], $today, $time_unit);
-                echo "<td>".$res['quantity']."</td>";
+                echo "<td>".($res['quantity']/100)."</td>";
             }
             echo "</tr>";
             echo "<tr>";
@@ -133,7 +138,7 @@
             // display the available tasks
             if(count($users)>0){
                 // Task selection
-                echo "<form method='POST' action='user.php'>";
+                echo "<form method='POST' action='index.php'>";
                 echo "<p> <fieldset>";
                 foreach($users as $user){
                     echo "<input type='radio' name='user_name' value='".$user."' id='".$user."'>";

@@ -1,5 +1,10 @@
 <?php
 
+    function cal_days_in_month_bis($month, $year){
+        // calculate number of days in a month
+        return $month == 2 ? ($year % 4 ? 28 : ($year % 100 ? 29 : ($year % 400 ? 28 : 29))) : (($month - 1) % 7 % 2 ? 30 : 31);
+    } 
+
     function get_days_of_a_week(int $week_number, int $year_number, int $stop){
         $today = new DateTime('today');
         $week = array();
@@ -13,7 +18,7 @@
     function get_days_of_a_month(int $month_number, int $year_number){
         $today = new DateTime('today');
         $month = array();
-        $stop = cal_days_in_month(CAL_GREGORIAN, $month_number, $year_number);
+        $stop = cal_days_in_month_bis($month_number, $year_number);
         for($d = 0 ; $d < $stop ; $d++){
             $day = clone $today->setDate($year_number, $month_number, $d);
             if($day <= $today){
@@ -29,15 +34,16 @@
         $current_month_number = 1;
         $current_day = 0;
         for($d = 0 ; $d < $stop ; $d++){
-            $days_of_given_month = cal_days_in_month(CAL_GREGORIAN, $current_month_number, $year_number);
+            $days_of_given_month = cal_days_in_month_bis($current_month_number, $year_number);
             if($current_day > $days_of_given_month-1){
                 $current_month_number++;
                 $current_day = 0;
             }
-            $day = clone $today->setDate($year_number, $current_month_number, $d);
+            $day = clone $today->setDate($year_number, $current_month_number, $current_day);
             $year[$d] = $day->format('d.m.y');
             $current_day++;
         }
+        unset($year[0]);
         return $year;
     }
 
@@ -135,6 +141,17 @@
         }
         $time_scale = array_reverse($time_scale);
         $time_scale[$offset] = $today;
+        $quantities = array();
+        $means = array();
+        $means[0] = 0;
+        $idx = 0;
+        foreach($time_scale as $date){
+            $temp = get_quantity($data, $date, $time_unit);
+            $quantities[$idx] = $temp['quantity'];
+            $means[$idx+1] = ($means[$idx] + $quantities[$idx])/($idx+1);
+            $idx++;
+        }
+        unset($means[0]);
         // display as a table
         echo "<div id='pane'>";
         echo "<table class='a' style='width:100%'>";
@@ -145,17 +162,15 @@
         }
         echo "</tr>"; // end of first row
         echo "<tr>";
-        echo "<td> Cumulated quantity (cl) </td>"; // second row
-        foreach($time_scale as $date){
-            $res = get_quantity($data, $date, $time_unit);
-            echo "<td>".$res['quantity']."</td>";
+        echo "<td> Quantity (l) </td>"; // second row
+        foreach($quantities as $val){
+            echo "<td>".($val/100)."</td>";
         }
         echo "</tr>";
         echo "<tr>";
-        echo "<td> Equivalent quantity (cl) per day </td>"; // second row
-        foreach($time_scale as $date){
-            $res = get_quantity($data, $date, $time_unit);
-            echo "<td>".round($res['quantity']/$res['count'],2)."</td>";
+        echo "<td> Cumulated mean (l/".$time_unit.") </td>"; // second row
+        foreach($means as $val){
+            echo "<td>".round($val/100,2)."</td>";
         }
         echo "</tr>";
         echo "</table>";

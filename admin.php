@@ -61,6 +61,7 @@
 
 <head>
     <title>&#x1F6BF Admin page </title>
+    <link rel="stylesheet" type="text/css" href="beertracker/style.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>

@@ -1,6 +1,4 @@
 <?php
-    session_start();
-    unset($_SESSION['user_name']);
-    session_destroy();
+    file_put_contents('data/current_user.txt', '');
     header('location: index.php');
 ?>

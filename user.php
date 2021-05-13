@@ -1,25 +1,12 @@
 <?php
-    // start session and store user's name
-    session_start();
-    if(isset($_POST['user_name']) && !isset($_SESSION['user_name'])){
-        $_SESSION['user_name'] = $_POST['user_name'];
-    }
-    elseif(!isset($_POST['user_name']) && !isset($_SESSION['user_name'])){
-        header('location: index.php');
-    }
-    elseif(isset($_POST['user_name']) && isset($_SESSION['user_name'])){
-        if($_POST['user_name'] != $_SESSION['user_name']){
-            $_SESSION['user_name'] = $_POST['user_name'];
-        }
-    }
-?>
-
-<?php
     include 'utils.php';
     $today = new DateTimeImmutable('today');
     $data_file = 'data/data.json';
     $data = json_decode(file_get_contents($data_file), true);
-    $user = $_SESSION['user_name'];
+    $user = file_get_contents('data/current_user.txt');
+    if($user == ''){
+        header('location: index.php');
+    }
     // if add or modify is submitted
     if(isset($_POST['submit_drink'])){
         $date = new DateTimeImmutable($_POST['date']);
@@ -68,6 +55,7 @@
 
 <head>
     <title>User page</title>
+    <link rel="stylesheet" type="text/css" href="beertracker/style.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
