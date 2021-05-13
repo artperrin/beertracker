@@ -7,7 +7,7 @@ A *very* simple web app to track users' beer consumption.
 ## Install the app on your system
 
 This app is designed to be used in a web server. However, you can use it localy with tools like [Wampserver](https://sourceforge.net/projects/wampserver/files/) on Windows.
-After the tool is installed and launched, clone this repository on your app directory (for `Wampserver` users it would be something like `C:\wamp64\www\roommate-equalizer`) and search its adress with your favorite browser : `http://localhost/roommate-equalizer/index.php`.
+After the tool is installed and launched, clone this repository on your app directory (for `Wampserver` users it would be something like `C:\wamp64\www\beertracker`) and search its adress with your favorite browser : `http://localhost/beertracker/index.php`.
 
 ## How to use the app
 
