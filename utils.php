@@ -54,7 +54,6 @@
         $date_format = $date->format('d.m.y');
         if($time_unit == 'day' && isset($user_data[$date_format])){
             $res = $user_data[$date_format];
-            $count++;  
         }
         elseif($time_unit == 'week'){
             $week_number = $date->format('W');
@@ -142,12 +141,14 @@
         $time_scale = array_reverse($time_scale);
         $time_scale[$offset] = $today;
         $quantities = array();
+        $per_days = array();
         $means = array();
         $means[0] = 0;
         $idx = 0;
         foreach($time_scale as $date){
             $temp = get_quantity($data, $date, $time_unit);
             $quantities[$idx] = $temp['quantity'];
+            $per_days[$idx] = $temp['quantity']/$temp['count'];
             $means[$idx+1] = ($means[$idx] + $quantities[$idx])/($idx+1);
             $idx++;
         }
@@ -171,6 +172,12 @@
         echo "<td> Cumulated mean (l/".$time_unit.") </td>"; // second row
         foreach($means as $val){
             echo "<td>".round($val/100,2)."</td>";
+        }
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td> Equivalent per day (cl/day) </td>"; // second row
+        foreach($per_days as $val){
+            echo "<td>".round($val,2)."</td>";
         }
         echo "</tr>";
         echo "</table>";

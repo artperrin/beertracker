@@ -36,4 +36,6 @@ Note that if there are only one user, he will be selected as default user for th
 
 Here the user can add or modify a drink on a given date. He can also visualize the evolution of his consumption on a chosen time scale (day, week, month, year) with a given offset (by default the last two weeks):
 
-![fast entry](./readme_assets/user.PNG)
+![user page](./readme_assets/user.PNG)
+
+***Note that a new metric has been added: the cumulated mean over chosen time scale.***
