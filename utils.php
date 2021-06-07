@@ -10,7 +10,7 @@
         $week = array();
         for($d = 1 ; $d <= $stop ; $d++){
             $day = clone $today->setISODate($year_number, $week_number, $d);
-            $week[$d] = $day->format('d.m.y');
+            $week[$d] = $day->format('Y-m-d');
         }
         return $week;
     }
@@ -22,7 +22,7 @@
         for($d = 0 ; $d < $stop ; $d++){
             $day = clone $today->setDate($year_number, $month_number, $d);
             if($day <= $today){
-                $month[$d] = $day->format('d.m.y');
+                $month[$d] = $day->format('Y-m-d');
             }
         }
         return $month;
@@ -40,7 +40,7 @@
                 $current_day = 0;
             }
             $day = clone $today->setDate($year_number, $current_month_number, $current_day);
-            $year[$d] = $day->format('d.m.y');
+            $year[$d] = $day->format('Y-m-d');
             $current_day++;
         }
         unset($year[0]);
@@ -51,7 +51,7 @@
         // from $data, count all the entries for one $user on a given $time_unit
         $res = 0;
         $count = 1;
-        $date_format = $date->format('d.m.y');
+        $date_format = $date->format('Y-m-d');
         if($time_unit == 'day' && isset($user_data[$date_format])){
             $res = $user_data[$date_format];
         }

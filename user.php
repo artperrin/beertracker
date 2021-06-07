@@ -12,7 +12,7 @@
         $date = new DateTimeImmutable($_POST['date']);
         if($today >= $date && is_numeric($_POST['quantity'])){
             $state = 'added';
-            $date_format = $date->format('d.m.y');
+            $date_format = $date->format('Y-m-d');
             $quantity = (float) $_POST['quantity'];
             if(isset($data[$user][$date_format])){
                 $state = 'modified';

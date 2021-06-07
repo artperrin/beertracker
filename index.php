@@ -7,7 +7,7 @@
     $users = array_keys($data);
     // if shortcut was taken
     if(isset($_POST['submit_drink']) && is_numeric($_POST['drank_today'])){
-        $today_format = $today->format('d.m.y');
+        $today_format = $today->format('Y-m-d');
         if(count($users)>1){
             $drinker = $_POST['user'];
         }
@@ -33,6 +33,15 @@
     if(isset($_POST['go_to_user']) && isset($_POST['user_name'])){
         file_put_contents('data/current_user.txt', $_POST['user_name']);
         header('location: user.php');
+    }
+    if(isset($_POST['download'])){
+        //Define header information
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/json');
+        header('Content-Disposition: attachment; filename="'.basename($data_file).'"');
+        header('Content-Length: ' . filesize($data_file));
+        flush();
+        readfile($data_file, true);
     }
 ?>
 
@@ -129,6 +138,14 @@
                 <input class='button' type='submit' name='change_view' value='select'>
             </form>
         </p>
+
+    <!-- here a "download to .csv tab" -->
+
+    <p>
+        <form method=POST action="index.php">
+            <input class='button_big' type='submit' name='download' value='Download data'>
+        </form>
+    </p>
 
     <!-- below the statistics, create a user's selector and redirect to the complete stat page -->
 
